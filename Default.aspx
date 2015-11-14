@@ -6,15 +6,5 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolderMain" runat="server">
-    <aside>
-        <section>
-            <h2>Temas</h2>
-            <a href="#">Literatura</a>
-            <a href="#">Poesia</a>
-            <a href="#">Engenharia</a>
-            <a href="#">Gestão</a>
-            <a href="#">História</a>
-            <a href="#"></a>
-        </section>
-    </aside>
+   Editar texto da página principal
 </asp:Content>

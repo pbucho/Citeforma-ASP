@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-using System.Data.CommandType;
 using System.Configuration;
 
 public partial class paginas_livros : System.Web.UI.Page
@@ -24,12 +23,10 @@ public partial class paginas_livros : System.Web.UI.Page
         SqlCommand sql = new SqlCommand();
         sql.CommandType = CommandType.Text;
         sql.Connection = editoraConnection;
-        sql.CommandText = "SELECT * FROM dbo.Livros WHERE titulo LIKE '%"+termo_pesquisa+"%';";
+        sql.CommandText = "SELECT * FROM dbo.Livros WHERE titulo LIKE '%" + termo_pesquisa + "%';";
 
         editoraConnection.Open();
         sql.ExecuteNonQuery();
         editoraConnection.Close();
-
-        gv_resultadoPesquisa.DataSource();
     }
 }

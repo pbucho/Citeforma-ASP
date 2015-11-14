@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Livraria</title>
-    <link rel="stylesheet" type="text/css" href="style1.css" />
+    <link rel="stylesheet" type="text/css" href="App_Themes/style1.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -16,22 +16,33 @@
                 <h1>a ler é que a gente se entende!</h1>
                 <nav>
                     <ul>
-                        <li><a href="./Default.aspx" class="current">página inicial</a></li>
-                        <li><a href="./paginas/livros.aspx">livros</a></li>
-                        <li><a href="./paginas/autores.aspx">autores</a></li>
-                        <li><a href="./paginas/clientes.aspx">clientes</a></li>
-                        <li><a href="./paginas/encomendas.aspx">encomendas</a></li>
+                        <li><a href="/Default.aspx" class="current">página inicial</a></li>
+                        <li><a href="/paginas/livros.aspx">livros</a></li>
+                        <li><a href="/paginas/autores.aspx">autores</a></li>
+                        <li><a href="/paginas/clientes.aspx">clientes</a></li>
+                        <li><a href="/paginas/encomendas.aspx">encomendas</a></li>
                         <li>&nbsp; | &nbsp;</li>
                         <li><a href="./paginas/contactos.aspx">contactos</a></li>
                     </ul>
                 </nav>
             </header>
+            <aside>
+                <section>
+                    <h2>Temas</h2>
+                    <a href="#">Literatura</a>
+                    <a href="#">Poesia</a>
+                    <a href="#">Engenharia</a>
+                    <a href="#">Gestão</a>
+                    <a href="#">História</a>
+                    <a href="#"></a>
+                </section>
+            </aside>
             <%-- conteúdo a definir nas Content Pages --%>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolderMain"
-                runat="server">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server">
             </asp:ContentPlaceHolder>
             <footer>
-                &copy; 2014 <b>a ler é que a gente se entende!</b>
+                <span style="float: left">&copy; 2014 <b>a ler é que a gente se entende!</b></span>
+                <span style="float: right">Pedro Bucho</span>
             </footer>
         </div>
         <!-- .wrapper -->

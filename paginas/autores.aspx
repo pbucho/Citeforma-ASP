@@ -1,16 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="autores.aspx.cs" Inherits="paginas_autores" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="autores.aspx.cs" Inherits="paginas_autores"
+    MasterPageFile="~/master1.master"%>
 
-<!DOCTYPE html>
+<asp:Content ContentPlaceHolderID="head" runat="server">
+</asp:Content>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    
-    </div>
-    </form>
-</body>
-</html>
+<asp:Content ContentPlaceholderID="ContentPlaceHolderMain" runat="server">
+    <p>ola</p>
+</asp:Content>
