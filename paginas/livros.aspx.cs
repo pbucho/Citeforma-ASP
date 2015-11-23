@@ -12,9 +12,17 @@ public partial class paginas_livros : System.Web.UI.Page
 {
     SqlConnection editoraConnection = new SqlConnection(
         ConfigurationManager.ConnectionStrings["EditoraConnectionString"].ConnectionString);
+    UserManager um = new UserManager();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         ValidationSettings.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
+
+        if (!um.isUserLoggedIn())
+        {
+            lb_editar_livros_login.Text = "Após iniciar sessão, pode inserir, editar e remover livros da lista";
+        }
+        
     }
     protected void bt_pesquisar_Click(object sender, EventArgs e)
     {

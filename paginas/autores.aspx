@@ -5,5 +5,5 @@
 </asp:Content>
 
 <asp:Content ContentPlaceholderID="ContentPlaceHolderMain" runat="server">
-    <p>ola</p>
+    <h2>Autores</h2>
 </asp:Content>

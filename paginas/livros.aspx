@@ -14,9 +14,6 @@
         <br />
         <br />
         <asp:GridView ID="gv_resultadoPesquisa" runat="server" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Horizontal">
-            <Columns>
-                <asp:CommandField ShowSelectButton="True" />
-            </Columns>
             <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
             <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
@@ -27,5 +24,6 @@
             <SortedDescendingHeaderStyle BackColor="#242121" />
         </asp:GridView>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EditoraConnectionString %>" SelectCommand="SELECT [Titulo], [ISBN], [Categoria], [AnoLancamento], [Preco] FROM [Livros] ORDER BY [Titulo]"></asp:SqlDataSource>
+        <b><asp:Label ID="lb_editar_livros_login" runat="server" >PLACEHOLDER</asp:Label></b>
     </div>
 </asp:Content>

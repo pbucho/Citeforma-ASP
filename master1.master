@@ -21,8 +21,10 @@
                         <li><a href="/paginas/autores.aspx">autores</a></li>
                         <li><a href="/paginas/clientes.aspx">clientes</a></li>
                         <li><a href="/paginas/encomendas.aspx">encomendas</a></li>
+                        <li><a href="/paginas/contactos.aspx">contactos</a></li>
                         <li>&nbsp; | &nbsp;</li>
-                        <li><a href="./paginas/contactos.aspx">contactos</a></li>
+                        <li><a href="/paginas/login.aspx"></a><asp:Label ID="login_status" runat="server">PLACEHOLDER</asp:Label> - 
+                            <asp:LinkButton ID="log_user" runat="server" OnClick="log_user_Click">PLACEHOLDER</asp:LinkButton></li>
                     </ul>
                 </nav>
             </header>
@@ -36,12 +38,19 @@
                     <a href="#">História</a>
                     <a href="#"></a>
                 </section>
+                <section>
+                    <h2>Contactos</h2>
+                    <p><b>a ler é que a gente se entende</b><br />
+                    Largo Camões, 80<br />
+                    1100-100 Lisboa<br />
+                    213 456 789</p>
+                </section>
             </aside>
             <%-- conteúdo a definir nas Content Pages --%>
             <asp:ContentPlaceHolder ID="ContentPlaceHolderMain" runat="server">
             </asp:ContentPlaceHolder>
             <footer>
-                <span style="float: left">&copy; 2014 <b>a ler é que a gente se entende!</b></span>
+                <span style="float: left">&copy; 2015 <b>a ler é que a gente se entende!</b></span>
                 <span style="float: right">Pedro Bucho</span>
             </footer>
         </div>

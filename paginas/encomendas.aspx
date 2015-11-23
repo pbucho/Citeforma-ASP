@@ -1,16 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="encomendas.aspx.cs" Inherits="paginas_encomendas" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="encomendas.aspx.cs" Inherits="paginas_encomendas" 
+    MasterPageFile="~/master1.master"%>
 
-<!DOCTYPE html>
+<asp:Content ContentPlaceHolderID="head" runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    
-    </div>
-    </form>
-</body>
-</html>
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderMain" runat="server">
+    <h2>Encomendas</h2>
+</asp:Content>
