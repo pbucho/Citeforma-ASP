@@ -6,8 +6,8 @@
     </asp:Content>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolderMain" runat="server">
-    <h2>Pesquisa de livros</h2>
-    <p>Faça uma procura de livros pelo título</p>
+    <h2>Livros</h2>
+    <p>Faça uma pesquisa de livros pelo título</p>
     <div>
         Título do livro: <asp:TextBox ID="tx_titulo" runat="server"></asp:TextBox>
         &nbsp;<asp:Button ID="bt_pesquisar" runat="server" Text="Pesquisar" OnClick="bt_pesquisar_Click" />

@@ -7,5 +7,5 @@
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolderMain" runat="server">
     <h2>Iniciar sessão</h2>
-    <asp:Login ID="Login1" runat="server"></asp:Login>
+    <asp:Login ID="Login1" runat="server" OnAuthenticate="Login1_Authenticate"></asp:Login>
 </asp:Content>
