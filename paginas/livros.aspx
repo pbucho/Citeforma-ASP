@@ -12,8 +12,9 @@
         Título do livro: <asp:TextBox ID="tx_titulo" runat="server"></asp:TextBox>
         &nbsp;<asp:Button ID="bt_pesquisar" runat="server" Text="Pesquisar" OnClick="bt_pesquisar_Click" />
         <br />
+        <b><asp:Label ID="lb_editar_livros_login" runat="server" >PLACEHOLDER</asp:Label></b>
         <br />
-        <asp:GridView ID="gv_resultadoPesquisa" runat="server" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Horizontal">
+        <asp:GridView ID="gv_resultadoPesquisa" runat="server" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
             <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
             <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
             <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
@@ -23,7 +24,5 @@
             <SortedDescendingCellStyle BackColor="#E5E5E5" />
             <SortedDescendingHeaderStyle BackColor="#242121" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:EditoraConnectionString %>" SelectCommand="SELECT [Titulo], [ISBN], [Categoria], [AnoLancamento], [Preco] FROM [Livros] ORDER BY [Titulo]"></asp:SqlDataSource>
-        <b><asp:Label ID="lb_editar_livros_login" runat="server" >PLACEHOLDER</asp:Label></b>
     </div>
 </asp:Content>

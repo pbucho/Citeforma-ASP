@@ -16,9 +16,9 @@ public class DBManager
         
     }
 
-    public DataTable selectLike(String table, String col, String match)
+    public DataTable selectLike(String table, String colMatch, String match)
     {
-        SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM " + table + " WHERE " + col + " LIKE '%" + match + "%'", editoraConnection);
+        SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM " + table + " WHERE " + colMatch + " LIKE '%" + match + "%'", editoraConnection);
         DataTable dtTable = new DataTable();
         da.Fill(dtTable);
 
@@ -28,6 +28,15 @@ public class DBManager
     public DataTable selectAll(String table)
     {
         SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM " + table, editoraConnection);
+        DataTable dtTable = new DataTable();
+        da.Fill(dtTable);
+
+        return dtTable;
+    }
+
+    public DataTable selectCriteria(String table, String col, String colMatch, String match)
+    {
+        SqlDataAdapter da = new SqlDataAdapter("SELECT " + col + " FROM " + table + " WHERE " + colMatch + " = '" + match + "'", editoraConnection);
         DataTable dtTable = new DataTable();
         da.Fill(dtTable);
 

@@ -10,9 +10,8 @@ using System.Configuration;
 
 public partial class paginas_livros : System.Web.UI.Page
 {
-    SqlConnection editoraConnection = new SqlConnection(
-        ConfigurationManager.ConnectionStrings["EditoraConnectionString"].ConnectionString);
     UserManager um = new UserManager();
+    DBManager dbm = new DBManager();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,19 +21,30 @@ public partial class paginas_livros : System.Web.UI.Page
         {
             lb_editar_livros_login.Text = "Após iniciar sessão, pode inserir, editar e remover livros da lista";
         }
-        
+
+        if (!Page.IsPostBack)
+        {
+            gv_resultadoPesquisa.DataSource = dbm.selectAll("Livros");
+        }else
+        {
+            gv_resultadoPesquisa.DataSource = null;
+        }
+        gv_resultadoPesquisa.DataBind();
+
     }
     protected void bt_pesquisar_Click(object sender, EventArgs e)
     {
         string termo_pesquisa = tx_titulo.Text;
 
-        SqlCommand sql = new SqlCommand();
-        sql.CommandType = CommandType.Text;
-        sql.Connection = editoraConnection;
-        sql.CommandText = "SELECT * FROM dbo.Livros WHERE titulo LIKE '%" + termo_pesquisa + "%';";
-
-        editoraConnection.Open();
-        sql.ExecuteNonQuery();
-        editoraConnection.Close();
+        DataTable dtb = dbm.selectLike("dbo.Livros", "titulo", termo_pesquisa);
+        if (dtb.DataSet == null && Page.IsPostBack)
+        {
+            lb_editar_livros_login.Text = "Não existem resultados que correspondam ao critério seleccionado";
+        }
+        else
+        {
+            gv_resultadoPesquisa.DataSource = dtb;
+            gv_resultadoPesquisa.DataBind();
+        }
     }
 }
