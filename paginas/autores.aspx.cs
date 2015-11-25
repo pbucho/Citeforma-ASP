@@ -21,6 +21,23 @@ public partial class paginas_autores : System.Web.UI.Page
         if (!um.isUserLoggedIn())
         {
             lb_editar_autores_login.Text = "Após iniciar sessão, pode inserir, editar e remover autores da lista";
+
+            SqlCommand sql = new SqlCommand();
+            sql.CommandType = CommandType.Text;
+            sql.Connection = editoraConnection;
+            sql.CommandText = "SELECT * FROM dbo.Autores";
+
+            editoraConnection.Open();
+            sql.ExecuteNonQuery();
+            editoraConnection.Close();
+
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = sql;
+            DataTable dt_tbl = new DataTable();
+            da.Fill(dt_tbl);
+
+            gridview_autores.DataSource = dt_tbl;
+            gridview_autores.DataBind();
         }
     }
 
@@ -28,13 +45,20 @@ public partial class paginas_autores : System.Web.UI.Page
     {
         string termo_pesquisa = tx_autor.Text;
 
-        SqlCommand sql = new SqlCommand();
+        /*SqlCommand sql = new SqlCommand();
         sql.CommandType = CommandType.Text;
         sql.Connection = editoraConnection;
         sql.CommandText = "SELECT * FROM dbo.Autores WHERE nome LIKE '%" + termo_pesquisa + "%';";
 
         editoraConnection.Open();
         sql.ExecuteNonQuery();
-        editoraConnection.Close();
+        editoraConnection.Close();*/
+
+
+        SqlDataAdapter da_autores = new SqlDataAdapter("SELECT * FROM Autores WHERE nome LIKE '%" + termo_pesquisa + "%'", editoraConnection);
+        DataTable tb_autores = new DataTable();
+        da_autores.Fill(tb_autores);
+        gridview_autores.DataSource = tb_autores;
+        gridview_autores.DataBind();
     }
 }
