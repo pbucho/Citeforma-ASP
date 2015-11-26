@@ -1,0 +1,645 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EditoraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Autores">
+          <Key>
+            <PropertyRef Name="IDAutor" />
+          </Key>
+          <Property Name="IDAutor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="PaisOrigem" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="PremioNobel" Type="bit" Nullable="false" />
+          <Property Name="ResumoObra" Type="nvarchar" MaxLength="2500" />
+        </EntityType>
+        <EntityType Name="AutoresLivros">
+          <Key>
+            <PropertyRef Name="IDAutorLivro" />
+          </Key>
+          <Property Name="IDAutorLivro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Autor" Type="int" />
+          <Property Name="Livro" Type="int" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="IDCategoria" />
+          </Key>
+          <Property Name="IDCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categoria" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="2500" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="NIF" />
+          </Key>
+          <Property Name="NIF" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Morada" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CodigoPostal" Type="nchar" MaxLength="8" Nullable="false" />
+          <Property Name="Localidade" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Telefone" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EncomendaLivros">
+          <Key>
+            <PropertyRef Name="IDEncomendaLivro" />
+          </Key>
+          <Property Name="IDEncomendaLivro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Encomenda" Type="int" />
+          <Property Name="Livro" Type="int" />
+          <Property Name="Quantidade" Type="int" />
+        </EntityType>
+        <EntityType Name="Encomendas">
+          <Key>
+            <PropertyRef Name="IDEncomenda" />
+          </Key>
+          <Property Name="IDEncomenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="nchar" MaxLength="10" />
+          <Property Name="NIFCliente" Type="nvarchar" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="Livros">
+          <Key>
+            <PropertyRef Name="IDLivro" />
+          </Key>
+          <Property Name="IDLivro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ISBN" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Categoria" Type="int" />
+          <Property Name="AnoLancamento" Type="int" />
+          <Property Name="Preco" Type="money" />
+          <Property Name="QuantidadeStock" Type="int" />
+        </EntityType>
+        <Association Name="ChaveExterna_AutorLivro">
+          <End Role="Autores" Type="Self.Autores" Multiplicity="0..1" />
+          <End Role="AutoresLivros" Type="Self.AutoresLivros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autores">
+              <PropertyRef Name="IDAutor" />
+            </Principal>
+            <Dependent Role="AutoresLivros">
+              <PropertyRef Name="Autor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutoresLivros_Livros">
+          <End Role="Livros" Type="Self.Livros" Multiplicity="0..1" />
+          <End Role="AutoresLivros" Type="Self.AutoresLivros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Livros">
+              <PropertyRef Name="IDLivro" />
+            </Principal>
+            <Dependent Role="AutoresLivros">
+              <PropertyRef Name="Livro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EncomendaLivros_Encomendas">
+          <End Role="Encomendas" Type="Self.Encomendas" Multiplicity="0..1" />
+          <End Role="EncomendaLivros" Type="Self.EncomendaLivros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Encomendas">
+              <PropertyRef Name="IDEncomenda" />
+            </Principal>
+            <Dependent Role="EncomendaLivros">
+              <PropertyRef Name="Encomenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EncomendaLivros_Livros">
+          <End Role="Livros" Type="Self.Livros" Multiplicity="0..1" />
+          <End Role="EncomendaLivros" Type="Self.EncomendaLivros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Livros">
+              <PropertyRef Name="IDLivro" />
+            </Principal>
+            <Dependent Role="EncomendaLivros">
+              <PropertyRef Name="Livro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomendas_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="Encomendas" Type="Self.Encomendas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="NIF" />
+            </Principal>
+            <Dependent Role="Encomendas">
+              <PropertyRef Name="NIFCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livros_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="Livros" Type="Self.Livros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="Livros">
+              <PropertyRef Name="Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_Autores_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDAutor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Autores_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nome" Type="nvarchar" Mode="In" />
+          <Parameter Name="PaisOrigem" Type="nvarchar" Mode="In" />
+          <Parameter Name="PremioNobel" Type="bit" Mode="In" />
+          <Parameter Name="ResumoObra" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Autores_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Autores_Select_By_IDAutor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDAutor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Autores_Select_By_Nome" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nome" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Autores_Select_By_PremioNobel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PremioNobel" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SP_Autores_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDAutor" Type="int" Mode="In" />
+          <Parameter Name="Nome" Type="nvarchar" Mode="In" />
+          <Parameter Name="PaisOrigem" Type="nvarchar" Mode="In" />
+          <Parameter Name="PremioNobel" Type="bit" Mode="In" />
+          <Parameter Name="ResumoObra" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Categorias_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDCategoria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Categorias_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Categoria" Type="nvarchar" Mode="In" />
+          <Parameter Name="Descricao" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Categorias_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Categorias_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDCategoria" Type="int" Mode="In" />
+          <Parameter Name="Categoria" Type="nvarchar" Mode="In" />
+          <Parameter Name="Descricao" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="EditoraModelStoreContainer">
+          <EntitySet Name="Autores" EntityType="Self.Autores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AutoresLivros" EntityType="Self.AutoresLivros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EncomendaLivros" EntityType="Self.EncomendaLivros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Encomendas" EntityType="Self.Encomendas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Livros" EntityType="Self.Livros" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="ChaveExterna_AutorLivro" Association="Self.ChaveExterna_AutorLivro">
+            <End Role="Autores" EntitySet="Autores" />
+            <End Role="AutoresLivros" EntitySet="AutoresLivros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutoresLivros_Livros" Association="Self.FK_AutoresLivros_Livros">
+            <End Role="Livros" EntitySet="Livros" />
+            <End Role="AutoresLivros" EntitySet="AutoresLivros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EncomendaLivros_Encomendas" Association="Self.FK_EncomendaLivros_Encomendas">
+            <End Role="Encomendas" EntitySet="Encomendas" />
+            <End Role="EncomendaLivros" EntitySet="EncomendaLivros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EncomendaLivros_Livros" Association="Self.FK_EncomendaLivros_Livros">
+            <End Role="Livros" EntitySet="Livros" />
+            <End Role="EncomendaLivros" EntitySet="EncomendaLivros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomendas_Clientes" Association="Self.FK_Encomendas_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Encomendas" EntitySet="Encomendas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livros_Categorias" Association="Self.FK_Livros_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Livros" EntitySet="Livros" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EditoraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Autore">
+          <Key>
+            <PropertyRef Name="IDAutor" />
+          </Key>
+          <Property Name="IDAutor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaisOrigem" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PremioNobel" Type="Boolean" Nullable="false" />
+          <Property Name="ResumoObra" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AutoresLivros" Relationship="Self.ChaveExterna_AutorLivro" FromRole="Autores" ToRole="AutoresLivros" />
+        </EntityType>
+        <EntityType Name="AutoresLivro">
+          <Key>
+            <PropertyRef Name="IDAutorLivro" />
+          </Key>
+          <Property Name="IDAutorLivro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Autor" Type="Int32" />
+          <Property Name="Livro" Type="Int32" />
+          <NavigationProperty Name="Autore" Relationship="Self.ChaveExterna_AutorLivro" FromRole="AutoresLivros" ToRole="Autores" />
+          <NavigationProperty Name="Livro1" Relationship="Self.FK_AutoresLivros_Livros" FromRole="AutoresLivros" ToRole="Livros" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IDCategoria" />
+          </Key>
+          <Property Name="IDCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categoria1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Livros" Relationship="Self.FK_Livros_Categorias" FromRole="Categorias" ToRole="Livros" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="NIF" />
+          </Key>
+          <Property Name="NIF" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Morada" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Localidade" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Encomendas" Relationship="Self.FK_Encomendas_Clientes" FromRole="Clientes" ToRole="Encomendas" />
+        </EntityType>
+        <EntityType Name="EncomendaLivro">
+          <Key>
+            <PropertyRef Name="IDEncomendaLivro" />
+          </Key>
+          <Property Name="IDEncomendaLivro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Encomenda" Type="Int32" />
+          <Property Name="Livro" Type="Int32" />
+          <Property Name="Quantidade" Type="Int32" />
+          <NavigationProperty Name="Encomenda1" Relationship="Self.FK_EncomendaLivros_Encomendas" FromRole="EncomendaLivros" ToRole="Encomendas" />
+          <NavigationProperty Name="Livro1" Relationship="Self.FK_EncomendaLivros_Livros" FromRole="EncomendaLivros" ToRole="Livros" />
+        </EntityType>
+        <EntityType Name="Encomenda">
+          <Key>
+            <PropertyRef Name="IDEncomenda" />
+          </Key>
+          <Property Name="IDEncomenda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NIFCliente" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Encomendas_Clientes" FromRole="Encomendas" ToRole="Clientes" />
+          <NavigationProperty Name="EncomendaLivros" Relationship="Self.FK_EncomendaLivros_Encomendas" FromRole="Encomendas" ToRole="EncomendaLivros" />
+        </EntityType>
+        <EntityType Name="Livro">
+          <Key>
+            <PropertyRef Name="IDLivro" />
+          </Key>
+          <Property Name="IDLivro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ISBN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Categoria" Type="Int32" />
+          <Property Name="AnoLancamento" Type="Int32" />
+          <Property Name="Preco" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="QuantidadeStock" Type="Int32" />
+          <NavigationProperty Name="AutoresLivros" Relationship="Self.FK_AutoresLivros_Livros" FromRole="Livros" ToRole="AutoresLivros" />
+          <NavigationProperty Name="Categoria1" Relationship="Self.FK_Livros_Categorias" FromRole="Livros" ToRole="Categorias" />
+          <NavigationProperty Name="EncomendaLivros" Relationship="Self.FK_EncomendaLivros_Livros" FromRole="Livros" ToRole="EncomendaLivros" />
+        </EntityType>
+        <Association Name="ChaveExterna_AutorLivro">
+          <End Role="Autores" Type="Self.Autore" Multiplicity="0..1" />
+          <End Role="AutoresLivros" Type="Self.AutoresLivro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autores">
+              <PropertyRef Name="IDAutor" />
+            </Principal>
+            <Dependent Role="AutoresLivros">
+              <PropertyRef Name="Autor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AutoresLivros_Livros">
+          <End Role="Livros" Type="Self.Livro" Multiplicity="0..1" />
+          <End Role="AutoresLivros" Type="Self.AutoresLivro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Livros">
+              <PropertyRef Name="IDLivro" />
+            </Principal>
+            <Dependent Role="AutoresLivros">
+              <PropertyRef Name="Livro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Livros_Categorias">
+          <End Role="Categorias" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Livros" Type="Self.Livro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="Livros">
+              <PropertyRef Name="Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Encomendas_Clientes">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Encomendas" Type="Self.Encomenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="NIF" />
+            </Principal>
+            <Dependent Role="Encomendas">
+              <PropertyRef Name="NIFCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EncomendaLivros_Encomendas">
+          <End Role="Encomendas" Type="Self.Encomenda" Multiplicity="0..1" />
+          <End Role="EncomendaLivros" Type="Self.EncomendaLivro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Encomendas">
+              <PropertyRef Name="IDEncomenda" />
+            </Principal>
+            <Dependent Role="EncomendaLivros">
+              <PropertyRef Name="Encomenda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EncomendaLivros_Livros">
+          <End Role="Livros" Type="Self.Livro" Multiplicity="0..1" />
+          <End Role="EncomendaLivros" Type="Self.EncomendaLivro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Livros">
+              <PropertyRef Name="IDLivro" />
+            </Principal>
+            <Dependent Role="EncomendaLivros">
+              <PropertyRef Name="Livro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EditoraEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Autores" EntityType="Self.Autore" />
+          <EntitySet Name="AutoresLivros" EntityType="Self.AutoresLivro" />
+          <EntitySet Name="Categorias" EntityType="Self.Categoria" />
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="EncomendaLivros" EntityType="Self.EncomendaLivro" />
+          <EntitySet Name="Encomendas" EntityType="Self.Encomenda" />
+          <EntitySet Name="Livros" EntityType="Self.Livro" />
+          <AssociationSet Name="ChaveExterna_AutorLivro" Association="Self.ChaveExterna_AutorLivro">
+            <End Role="Autores" EntitySet="Autores" />
+            <End Role="AutoresLivros" EntitySet="AutoresLivros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AutoresLivros_Livros" Association="Self.FK_AutoresLivros_Livros">
+            <End Role="Livros" EntitySet="Livros" />
+            <End Role="AutoresLivros" EntitySet="AutoresLivros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Livros_Categorias" Association="Self.FK_Livros_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Livros" EntitySet="Livros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Encomendas_Clientes" Association="Self.FK_Encomendas_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Encomendas" EntitySet="Encomendas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EncomendaLivros_Encomendas" Association="Self.FK_EncomendaLivros_Encomendas">
+            <End Role="Encomendas" EntitySet="Encomendas" />
+            <End Role="EncomendaLivros" EntitySet="EncomendaLivros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EncomendaLivros_Livros" Association="Self.FK_EncomendaLivros_Livros">
+            <End Role="Livros" EntitySet="Livros" />
+            <End Role="EncomendaLivros" EntitySet="EncomendaLivros" />
+          </AssociationSet>
+          <FunctionImport Name="SP_Autores_Delete">
+            <Parameter Name="IDAutor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Autores_Insert">
+            <Parameter Name="Nome" Mode="In" Type="String" />
+            <Parameter Name="PaisOrigem" Mode="In" Type="String" />
+            <Parameter Name="PremioNobel" Mode="In" Type="Boolean" />
+            <Parameter Name="ResumoObra" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Autores_Select" ReturnType="Collection(EditoraModel.SP_Autores_Select_Result)" />
+          <FunctionImport Name="SP_Autores_Select_By_IDAutor" ReturnType="Collection(EditoraModel.SP_Autores_Select_By_IDAutor_Result)">
+            <Parameter Name="IDAutor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Autores_Select_By_Nome" ReturnType="Collection(EditoraModel.SP_Autores_Select_By_Nome_Result)">
+            <Parameter Name="Nome" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Autores_Select_By_PremioNobel" ReturnType="Collection(EditoraModel.SP_Autores_Select_By_PremioNobel_Result)">
+            <Parameter Name="PremioNobel" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Autores_Update">
+            <Parameter Name="IDAutor" Mode="In" Type="Int32" />
+            <Parameter Name="Nome" Mode="In" Type="String" />
+            <Parameter Name="PaisOrigem" Mode="In" Type="String" />
+            <Parameter Name="PremioNobel" Mode="In" Type="Boolean" />
+            <Parameter Name="ResumoObra" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Categorias_Delete">
+            <Parameter Name="IDCategoria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Categorias_Insert">
+            <Parameter Name="Categoria" Mode="In" Type="String" />
+            <Parameter Name="Descricao" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Categorias_Select" ReturnType="Collection(EditoraModel.SP_Categorias_Select_Result)" />
+          <FunctionImport Name="SP_Categorias_Update">
+            <Parameter Name="IDCategoria" Mode="In" Type="Int32" />
+            <Parameter Name="Categoria" Mode="In" Type="String" />
+            <Parameter Name="Descricao" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SP_Autores_Select_Result">
+          <Property Type="Int32" Name="IDAutor" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="PaisOrigem" Nullable="false" MaxLength="1000" />
+          <Property Type="Boolean" Name="PremioNobel" Nullable="false" />
+          <Property Type="String" Name="ResumoObra" Nullable="true" MaxLength="2500" />
+        </ComplexType>
+        <ComplexType Name="SP_Autores_Select_By_IDAutor_Result">
+          <Property Type="Int32" Name="IDAutor" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="PaisOrigem" Nullable="false" MaxLength="1000" />
+          <Property Type="Boolean" Name="PremioNobel" Nullable="false" />
+          <Property Type="String" Name="ResumoObra" Nullable="true" MaxLength="2500" />
+        </ComplexType>
+        <ComplexType Name="SP_Autores_Select_By_Nome_Result">
+          <Property Type="Int32" Name="IDAutor" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="PaisOrigem" Nullable="false" MaxLength="1000" />
+          <Property Type="Boolean" Name="PremioNobel" Nullable="false" />
+          <Property Type="String" Name="ResumoObra" Nullable="true" MaxLength="2500" />
+        </ComplexType>
+        <ComplexType Name="SP_Autores_Select_By_PremioNobel_Result">
+          <Property Type="Int32" Name="IDAutor" Nullable="false" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="PaisOrigem" Nullable="false" MaxLength="1000" />
+          <Property Type="Boolean" Name="PremioNobel" Nullable="false" />
+          <Property Type="String" Name="ResumoObra" Nullable="true" MaxLength="2500" />
+        </ComplexType>
+        <ComplexType Name="SP_Categorias_Select_Result">
+          <Property Type="Int32" Name="IDCategoria" Nullable="false" />
+          <Property Type="String" Name="Categoria" Nullable="false" MaxLength="1000" />
+          <Property Type="String" Name="Descricao" Nullable="true" MaxLength="2500" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EditoraModelStoreContainer" CdmEntityContainer="EditoraEntities">
+          <EntitySetMapping Name="Autores">
+            <EntityTypeMapping TypeName="EditoraModel.Autore">
+              <MappingFragment StoreEntitySet="Autores">
+                <ScalarProperty Name="IDAutor" ColumnName="IDAutor" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="PaisOrigem" ColumnName="PaisOrigem" />
+                <ScalarProperty Name="PremioNobel" ColumnName="PremioNobel" />
+                <ScalarProperty Name="ResumoObra" ColumnName="ResumoObra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AutoresLivros">
+            <EntityTypeMapping TypeName="EditoraModel.AutoresLivro">
+              <MappingFragment StoreEntitySet="AutoresLivros">
+                <ScalarProperty Name="IDAutorLivro" ColumnName="IDAutorLivro" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="Livro" ColumnName="Livro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="EditoraModel.Categoria">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="EditoraModel.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="NIF" ColumnName="NIF" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Morada" ColumnName="Morada" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Localidade" ColumnName="Localidade" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EncomendaLivros">
+            <EntityTypeMapping TypeName="EditoraModel.EncomendaLivro">
+              <MappingFragment StoreEntitySet="EncomendaLivros">
+                <ScalarProperty Name="IDEncomendaLivro" ColumnName="IDEncomendaLivro" />
+                <ScalarProperty Name="Encomenda" ColumnName="Encomenda" />
+                <ScalarProperty Name="Livro" ColumnName="Livro" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Encomendas">
+            <EntityTypeMapping TypeName="EditoraModel.Encomenda">
+              <MappingFragment StoreEntitySet="Encomendas">
+                <ScalarProperty Name="IDEncomenda" ColumnName="IDEncomenda" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="NIFCliente" ColumnName="NIFCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Livros">
+            <EntityTypeMapping TypeName="EditoraModel.Livro">
+              <MappingFragment StoreEntitySet="Livros">
+                <ScalarProperty Name="IDLivro" ColumnName="IDLivro" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="AnoLancamento" ColumnName="AnoLancamento" />
+                <ScalarProperty Name="Preco" ColumnName="Preco" />
+                <ScalarProperty Name="QuantidadeStock" ColumnName="QuantidadeStock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Autores_Delete" FunctionName="EditoraModel.Store.SP_Autores_Delete" />
+          <FunctionImportMapping FunctionImportName="SP_Autores_Insert" FunctionName="EditoraModel.Store.SP_Autores_Insert" />
+          <FunctionImportMapping FunctionImportName="SP_Autores_Select" FunctionName="EditoraModel.Store.SP_Autores_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EditoraModel.SP_Autores_Select_Result">
+                <ScalarProperty Name="IDAutor" ColumnName="IDAutor" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="PaisOrigem" ColumnName="PaisOrigem" />
+                <ScalarProperty Name="PremioNobel" ColumnName="PremioNobel" />
+                <ScalarProperty Name="ResumoObra" ColumnName="ResumoObra" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Autores_Select_By_IDAutor" FunctionName="EditoraModel.Store.SP_Autores_Select_By_IDAutor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EditoraModel.SP_Autores_Select_By_IDAutor_Result">
+                <ScalarProperty Name="IDAutor" ColumnName="IDAutor" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="PaisOrigem" ColumnName="PaisOrigem" />
+                <ScalarProperty Name="PremioNobel" ColumnName="PremioNobel" />
+                <ScalarProperty Name="ResumoObra" ColumnName="ResumoObra" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Autores_Select_By_Nome" FunctionName="EditoraModel.Store.SP_Autores_Select_By_Nome">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EditoraModel.SP_Autores_Select_By_Nome_Result">
+                <ScalarProperty Name="IDAutor" ColumnName="IDAutor" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="PaisOrigem" ColumnName="PaisOrigem" />
+                <ScalarProperty Name="PremioNobel" ColumnName="PremioNobel" />
+                <ScalarProperty Name="ResumoObra" ColumnName="ResumoObra" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Autores_Select_By_PremioNobel" FunctionName="EditoraModel.Store.SP_Autores_Select_By_PremioNobel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EditoraModel.SP_Autores_Select_By_PremioNobel_Result">
+                <ScalarProperty Name="IDAutor" ColumnName="IDAutor" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="PaisOrigem" ColumnName="PaisOrigem" />
+                <ScalarProperty Name="PremioNobel" ColumnName="PremioNobel" />
+                <ScalarProperty Name="ResumoObra" ColumnName="ResumoObra" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Autores_Update" FunctionName="EditoraModel.Store.SP_Autores_Update" />
+          <FunctionImportMapping FunctionImportName="SP_Categorias_Delete" FunctionName="EditoraModel.Store.SP_Categorias_Delete" />
+          <FunctionImportMapping FunctionImportName="SP_Categorias_Insert" FunctionName="EditoraModel.Store.SP_Categorias_Insert" />
+          <FunctionImportMapping FunctionImportName="SP_Categorias_Select" FunctionName="EditoraModel.Store.SP_Categorias_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EditoraModel.SP_Categorias_Select_Result">
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Categorias_Update" FunctionName="EditoraModel.Store.SP_Categorias_Update" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

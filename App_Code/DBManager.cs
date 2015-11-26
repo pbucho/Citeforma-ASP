@@ -10,6 +10,7 @@ public class DBManager
 {
     SqlConnection editoraConnection = new SqlConnection(
         ConfigurationManager.ConnectionStrings["EditoraConnectionString"].ConnectionString);
+    EditoraEntities editora = new EditoraEntities();
 
     public DBManager()
     {
@@ -39,7 +40,7 @@ public class DBManager
         SqlDataAdapter da = new SqlDataAdapter("SELECT " + col + " FROM " + table + " WHERE " + colMatch + " = '" + match + "'", editoraConnection);
         DataTable dtTable = new DataTable();
         da.Fill(dtTable);
-
+        
         return dtTable;
     }
 }

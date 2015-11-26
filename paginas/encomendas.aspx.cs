@@ -8,20 +8,21 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-public partial class paginas_livros : System.Web.UI.Page
+public partial class paginas_encomendas : System.Web.UI.Page
 {
     UserManager um = new UserManager();
     DBManager dbm = new DBManager();
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        um.logInUser("Pedro");
         ValidationSettings.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
 
         if (!um.isUserLoggedIn())
         {
             lb_editar_encomendas_login.Text = "Após iniciar sessão, pode consultar, fazer, alterar e cancelar encomendas";
             lb_nif_cliente.Visible = false;
-            tx_nif.Visible = false;
+            tx_nif_pesquisa.Visible = false;
             lb_data_encomenda.Visible = false;
             cal_encomenda.Visible = false;
             bt_pesquisar.Visible = false;
@@ -41,7 +42,7 @@ public partial class paginas_livros : System.Web.UI.Page
     }
     protected void bt_pesquisar_Click(object sender, EventArgs e)
     {
-        string termo_pesquisa = tx_nif.Text;
+        string termo_pesquisa = tx_nif_pesquisa.Text;
         DateTime data_pesquisa = cal_encomenda.SelectedDate;
 
         DataTable dtb = null;
@@ -63,5 +64,16 @@ public partial class paginas_livros : System.Web.UI.Page
             gv_resultadoPesquisa.DataSource = dtb;
             gv_resultadoPesquisa.DataBind();
         }
+    }
+
+    protected void gv_resultadoPesquisa_PageIndexChanged(object sender, EventArgs e)
+    {
+        tx_nif.Text = gv_resultadoPesquisa.SelectedRow.Cells[1].Text;
+        tx_data.Text = gv_resultadoPesquisa.SelectedRow.Cells[2].Text;
+    }
+
+    protected void bt_submeter_Click(object sender, EventArgs e)
+    {
+
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="91f52d09503146e6b7ae2e24fbd3ee2f" Name="Diagram1">
+        <EntityTypeShape EntityType="EditoraModel.Autore" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EditoraModel.AutoresLivro" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EditoraModel.Categoria" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="EditoraModel.Cliente" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EditoraModel.EncomendaLivro" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EditoraModel.Encomenda" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="EditoraModel.Livro" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="EditoraModel.ChaveExterna_AutorLivro" ManuallyRouted="false" />
+        <AssociationConnector Association="EditoraModel.FK_AutoresLivros_Livros" ManuallyRouted="false" />
+        <AssociationConnector Association="EditoraModel.FK_Livros_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="EditoraModel.FK_Encomendas_Clientes" ManuallyRouted="false" />
+        <AssociationConnector Association="EditoraModel.FK_EncomendaLivros_Encomendas" ManuallyRouted="false" />
+        <AssociationConnector Association="EditoraModel.FK_EncomendaLivros_Livros" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

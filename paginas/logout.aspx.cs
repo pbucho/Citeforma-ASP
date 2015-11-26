@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class paginas_login : System.Web.UI.Page
+public partial class paginas_logout : System.Web.UI.Page
 {
     UserManager um = new UserManager();
 
