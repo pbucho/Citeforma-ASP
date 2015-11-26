@@ -19,7 +19,7 @@
         <asp:Label ID="lb_nome_cliente" runat="server" Text="Label">Nome do cliente:</asp:Label>&nbsp;<asp:TextBox ID="tx_nome_pesquisa" runat="server"></asp:TextBox>
         &nbsp;<asp:Button ID="bt_pesquisar" runat="server" Text="Pesquisar" OnClick="bt_pesquisar_Click" />
         <br />
-        <b><asp:Label ID="lb_editar_clientes_login" runat="server" >PLACEHOLDER</asp:Label></b>
+        <b><asp:Label ID="lb_editar_clientes_login" runat="server" ></asp:Label></b>
         <br />
         <asp:GridView ID="gv_resultadoPesquisa" runat="server" AllowSorting="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" AutoGenerateSelectButton="True" OnSelectedIndexChanged="gv_resultadoPesquisa_SelectedIndexChanged" OnRowDeleting="gv_resultadoPesquisa_RowDeleting">
             <FooterStyle BackColor="#CCCC99" ForeColor="Black" />

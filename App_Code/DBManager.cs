@@ -17,6 +17,15 @@ public class DBManager
         
     }
 
+    public DataTable executeSQL(String query)
+    {
+        SqlDataAdapter da = new SqlDataAdapter(query, editoraConnection);
+        DataTable dtTable = new DataTable();
+        da.Fill(dtTable);
+
+        return dtTable;
+    }
+
     public DataTable selectLike(String table, String colMatch, String match)
     {
         SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM " + table + " WHERE " + colMatch + " LIKE '%" + match + "%'", editoraConnection);

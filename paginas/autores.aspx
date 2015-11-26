@@ -11,7 +11,7 @@
         Nome do autor: <asp:TextBox ID="tx_autor" runat="server"></asp:TextBox>
         &nbsp;<asp:Button ID="bt_pesquisar" runat="server" Text="Pesquisar" OnClick="bt_pesquisar_Click" />
         <br />
-        <b><asp:Label ID="lb_editar_autores_login" runat="server" >PLACEHOLDER</asp:Label></b>
+        <b><asp:Label ID="lb_editar_autores_login" runat="server" ></asp:Label></b>
         <br />
         <asp:GridView ID="gv_autores" runat="server" AutoGenerateSelectButton="True" CellPadding="4" ForeColor="Black" GridLines="Horizontal" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" OnSelectedIndexChanged="gv_autores_SelectedIndexChanged">
                 <FooterStyle BackColor="#CCCC99" ForeColor="Black" />

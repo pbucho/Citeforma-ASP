@@ -13,7 +13,6 @@ public partial class paginas_autores : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        um.logInUser("Pedro");
         ValidationSettings.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
 
         if (!um.isUserLoggedIn())

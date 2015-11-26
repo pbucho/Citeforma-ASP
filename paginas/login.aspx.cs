@@ -14,6 +14,8 @@ public partial class paginas_login : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         ValidationSettings.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
+        um.logInUser("Sergio");
+        Response.Redirect("/Default.aspx");
     }
 
     protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)

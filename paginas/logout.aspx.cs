@@ -13,10 +13,8 @@ public partial class paginas_logout : System.Web.UI.Page
     {
         ValidationSettings.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
 
-        if (!Request.IsAuthenticated)
-        {
-            Response.Redirect("paginas/login.aspx");
-        }
+        um.logOutUser();
+        Response.Redirect("/Default.aspx");
     }
 
     protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)

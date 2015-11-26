@@ -12,7 +12,7 @@
         Título do livro: <asp:TextBox ID="tx_titulo" runat="server"></asp:TextBox>
         &nbsp;<asp:Button ID="bt_pesquisar" runat="server" Text="Pesquisar" OnClick="bt_pesquisar_Click" />
         <br />
-        <b><asp:Label ID="lb_editar_livros_login" runat="server" >PLACEHOLDER</asp:Label></b>
+        <b><asp:Label ID="lb_editar_livros_login" runat="server" ></asp:Label></b>
         <br />
         <asp:GridView ID="gv_resultadoPesquisa" runat="server" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
             <FooterStyle BackColor="#CCCC99" ForeColor="Black" />

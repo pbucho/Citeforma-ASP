@@ -17,12 +17,13 @@ public partial class master1 : System.Web.UI.MasterPage
         if (um.isUserLoggedIn())
         {
             // mostrar username
-            login_status.Text = "Bem-vindo, " + um.getUsername();
+            login_status.Text = "Olá, " + um.getUsername();
+            log_user.Text = "Terminar sessão";
         }
         else
         {
             // mostrar "olá anónimo"
-            login_status.Text = "Bem-vindo, anónimo";
+            login_status.Text = "Olá, anónimo";
             log_user.Text = "Iniciar sessão";
         }
     }
@@ -31,11 +32,11 @@ public partial class master1 : System.Web.UI.MasterPage
     {
         if (!um.isUserLoggedIn())
         {
-            Response.Redirect("paginas/login.aspx");
+            Response.Redirect("/paginas/login.aspx");
         }
         else
         {
-            Response.Redirect("paginas/logout.aspx");
+            Response.Redirect("/paginas/logout.aspx");
         }
     }
 }

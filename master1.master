@@ -21,10 +21,11 @@
                         <li><a href="/paginas/autores.aspx">autores</a></li>
                         <li><a href="/paginas/clientes.aspx">clientes</a></li>
                         <li><a href="/paginas/encomendas.aspx">encomendas</a></li>
+                        <li><a href="/paginas/categorias.aspx">categorias</a></li>
                         <li><a href="/paginas/contactos.aspx">contactos</a></li>
-                        <li>&nbsp; | &nbsp;</li>
-                        <li><a href="/paginas/login.aspx"></a><asp:Label ID="login_status" runat="server">PLACEHOLDER</asp:Label> - 
-                            <asp:LinkButton ID="log_user" runat="server" OnClick="log_user_Click">PLACEHOLDER</asp:LinkButton></li>
+                        <li>|</li>
+                        <li><a href="/paginas/login.aspx"></a><asp:Label ID="login_status" runat="server"></asp:Label> - 
+                            <span style="color: black"><asp:LinkButton ID="log_user" runat="server" OnClick="log_user_Click"></asp:LinkButton></span></li>
                     </ul>
                 </nav>
             </header>

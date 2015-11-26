@@ -17,17 +17,5 @@
         nascetur ridiculus mus. Vivamus urna purus, dapibus sit amet vulputate id, placerat vitae turpis. In ultrices a lectus porttitor
         tristique. In non pellentesque ex, et vulputate ante. Curabitur et consectetur leo, ac pretium ligula. Proin quam nisl, imperdiet
         eu quam cursus, viverra molestie libero. Donec vitae nisi a metus blandit aliquet non sed urna.</p>
-    <p>Aliquam molestie lorem sit amet quam scelerisque, in rhoncus massa molestie. Mauris tortor magna, sollicitudin non placerat quis,
-        vulputate eget turpis. Aliquam ornare lacus eu mattis euismod. Duis non odio eu metus tempor iaculis. Aliquam elementum tellus sed
-        fringilla accumsan. Vivamus mattis aliquam viverra. Vivamus varius metus sit amet quam facilisis, a condimentum augue consectetur.
-        Duis ultrices, metus in semper pretium, augue metus tincidunt massa, et ornare neque ex sit amet sem. Morbi rhoncus odio in justo mattis
-        laoreet. Fusce euismod augue euismod dolor pulvinar, ac pellentesque elit commodo. Integer cursus feugiat mauris, ac malesuada tellus viverra
-        quis.</p>
-    <p>Donec vestibulum dolor nec tellus elementum, id suscipit risus aliquam. Mauris ut odio a ipsum iaculis mollis. Sed vel mattis tortor. Etiam
-        tristique diam quis magna elementum, ut commodo purus consequat. Aliquam varius lacus vitae mi rutrum lacinia. Pellentesque habitant morbi
-        tristique senectus et netus et malesuada fames ac turpis egestas. Duis id bibendum urna. Aenean dapibus justo pretium tortor blandit interdum
-        eu vitae est. Sed mauris sapien, dapibus et diam et, luctus auctor ex. Aenean eu tellus sit amet ante commodo hendrerit. Sed venenatis mi ac
-        diam condimentum, at sodales leo porta. Aenean sollicitudin suscipit sapien, vel iaculis elit tincidunt in. Ut mauris massa, condimentum in
-        eleifend vitae, iaculis euismod diam. Sed vulputate, felis sed finibus pellentesque, neque urna sagittis felis, sed dignissim enim libero a
-        felis. Donec pulvinar ipsum quis facilisis scelerisque.</p>
+    
 </asp:Content>
