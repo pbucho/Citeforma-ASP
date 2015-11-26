@@ -28,8 +28,7 @@ public partial class paginas_clientes : System.Web.UI.Page
             return;
         }
 
-        gv_resultadoPesquisa.DataSource = dbm.selectAll("Clientes");
-        gv_resultadoPesquisa.DataBind();
+        updateGridView();
 
     }
     protected void bt_pesquisar_Click(object sender, EventArgs e)
@@ -50,27 +49,36 @@ public partial class paginas_clientes : System.Web.UI.Page
 
     protected void bt_submeter_Click(object sender, EventArgs e)
     {
-        if (!um.isUserLoggedIn())
-            return;
+        GridViewRow row = gv_resultadoPesquisa.SelectedRow;
+        Cliente cAntigo = null;
+        if (row != null)
+        {
+            cAntigo = editora.Clientes.Find(row.Cells[1].Text);
+        }
+        Cliente cNovo = new Cliente();
 
+        cNovo.NIF = tx_nif.Text;
+        cNovo.Nome = tx_nome.Text;
+        cNovo.Morada = tx_morada.Text;
+        cNovo.CodigoPostal = tx_codigo_postal.Text;
+        cNovo.Localidade = tx_localidade.Text;
+        cNovo.Telefone = tx_telefone.Text;
+        cNovo.Email = tx_email.Text;
+        cNovo.Codigo = tx_codigo.Text;
+
+        if (cAntigo != null)
+        {
+            editora.Clientes.Remove(cAntigo);
+        }
+        editora.Clientes.Add(cNovo);
+        editora.SaveChanges();
+
+        updateGridView();
     }
 
     protected void gv_resultadoPesquisa_SelectedIndexChanged(object sender, GridViewSelectEventArgs e)
     {
-        //isto é no edit
         
-        /*Cliente c = editora.Clientes.Find(int.Parse(gv_resultadoPesquisa.SelectedRow.Cells[1].Text));
-
-        c.NIF = tx_nif.Text;
-        c.Nome = tx_nome.Text;
-        c.Morada = tx_morada.Text;
-        c.CodigoPostal = tx_codigo_postal.Text;
-        c.Localidade = tx_localidade.Text;
-        c.Telefone = tx_telefone.Text;
-        c.Email = tx_email.Text;
-        c.Codigo = tx_codigo.Text;
-
-        editora.SaveChanges();*/
     }
 
     protected void gv_resultadoPesquisa_SelectedIndexChanged(object sender, EventArgs e)
@@ -84,5 +92,45 @@ public partial class paginas_clientes : System.Web.UI.Page
         tx_email.Text = gv_resultadoPesquisa.SelectedRow.Cells[7].Text;
         tx_codigo.Text = gv_resultadoPesquisa.SelectedRow.Cells[8].Text;
 
+    }
+
+    protected void lbt_eliminar_Click(object sender, EventArgs e)
+    {
+        GridViewRow row = gv_resultadoPesquisa.SelectedRow;
+        if(row == null)
+        {
+            return;
+        }
+
+        TableCell cell = row.Cells[1];
+
+        Cliente cAntigo = editora.Clientes.Find(cell.Text);
+        editora.Clientes.Remove(cAntigo);
+        editora.SaveChanges();
+
+        updateGridView();
+    }
+
+    protected void updateGridView()
+    {
+        gv_resultadoPesquisa.DataSource = dbm.selectAll("Clientes");
+        gv_resultadoPesquisa.DataBind();
+    }
+
+    protected void gv_resultadoPesquisa_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        GridViewRow row = gv_resultadoPesquisa.SelectedRow;
+        if (row == null)
+        {
+            return;
+        }
+
+        TableCell cell = row.Cells[1];
+
+        Cliente cAntigo = editora.Clientes.Find(cell.Text);
+        editora.Clientes.Remove(cAntigo);
+        editora.SaveChanges();
+
+        updateGridView();
     }
 }

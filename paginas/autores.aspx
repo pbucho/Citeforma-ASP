@@ -13,7 +13,7 @@
         <br />
         <b><asp:Label ID="lb_editar_autores_login" runat="server" >PLACEHOLDER</asp:Label></b>
         <br />
-        <asp:GridView ID="gridview_autores" runat="server" AutoGenerateSelectButton="True" CellPadding="4" ForeColor="Black" GridLines="Horizontal" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px">
+        <asp:GridView ID="gv_autores" runat="server" AutoGenerateSelectButton="True" CellPadding="4" ForeColor="Black" GridLines="Horizontal" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" OnSelectedIndexChanged="gv_autores_SelectedIndexChanged">
                 <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
                 <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
                 <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
@@ -23,5 +23,58 @@
                 <SortedDescendingCellStyle BackColor="#E5E5E5" />
                 <SortedDescendingHeaderStyle BackColor="#242121" />
             </asp:GridView>
+        <br />
+        <table class="auto-style1">
+            <tr>
+                <td class="auto-style2">IDAutor</td>
+                <td>
+                    <asp:TextBox ID="tx_id" runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tx_id" ErrorMessage="Obrigatório"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style2">Nome</td>
+                <td>
+                    <asp:TextBox ID="tx_nome" runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="tx_nome" ErrorMessage="Obrigatório"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style2">País origem</td>
+                <td>
+                    <asp:TextBox ID="tx_pais" runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="tx_pais" ErrorMessage="Obrigatório"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style2">Prémio Nobel</td>
+                <td>
+                    <asp:CheckBox ID="chk_nobel" runat="server" />
+                </td>
+                <td>
+                    &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style2">Resumo obra</td>
+                <td>
+                    <asp:TextBox ID="tx_resumo" runat="server"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="tx_resumo" ErrorMessage="Obrigatório"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style2" colspan="3">
+                    <asp:Button ID="bt_submeter" runat="server" Text="OK" OnClick="bt_submeter_Click" />
+                    <asp:LinkButton ID="lbt_eliminar" runat="server" OnClick="lbt_eliminar_Click">Eliminar registo seleccionado</asp:LinkButton>
+                </td>
+            </tr>
+        </table>
     </div>
 </asp:Content>
